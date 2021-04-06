@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:900');
+body {
+    background: #DB6713;
+    background: linear-gradient(95deg, #dba013, #df2445);
+}
+
+html {
+    min-width: 550px;
+    min-height: 700px;
+    position: relative;
+}
+
+h1 {
+    margin: 0px;
+    font-family: 'Montserrat', sans-serif;
+    color: #183059;
+    font-size: 250%;
+}
+
+h2 {
+    margin: 0px 0px 8px 0px;
+    font-family: 'Lato', sans-serif;
+    color: #183059;
+    font-size: 120%;
+}
+
+#blur-filter {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #ffffff26;
+    backdrop-filter: blur(4px);
+    height: 100vh;
+    width: 100vw;
+    z-index: -1000;
+}
+
+#stage {
+    /* gameboard*/
+    position: fixed;
+    border-radius: 5px;
+    padding: 40px;
+    margin: 5px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #FFFFFF;
+    z-index: 1;
+}
+
+div#container {
+    border-radius: 8px;
+    border: 3px solid rgb(9, 162, 27);
+    display: inline-block;
+    overflow: hidden;
+}
+
+#gameboard {
+    display: block;
+}
+
+#header {
+    float: bottom;
+}
+
+#option-btn {
+    cursor: pointer;
+    float: right;
+    margin: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 110px;
+    padding: 10px;
+    background: white;
+    font-weight: bold;
+    color: #183059;
+    font-family: 'Lato', sans-serif;
+    border: none;
+    text-align: left;
+    text-decoration: none;
+    z-index: 1;
+}
+
+#option-btn img {
+    /* settings img */
+    width: 17px;
+    height: 17px;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+#counter-container {
+    float: left;
+    text-align: left;
+    margin: 0px 0px 25px 0px;
+}
+
+#timer-container {
+    float: right;
+    text-align: right;
+    margin: 0px 0px 25px 0px;
+}
+
+.gray-filter {
+    display: none;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 500;
+}
+
+.popup-interface {
+    /* popup message */
+    display: none;
+    position: fixed;
+    border-radius: 8px;
+    padding: 25px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 1000;
+}
+
+#difficulty-selector h2 {
+    margin-top: 12px;
+    margin-left: 12px;
+    font-size: 30px;
+    float: left;
+}
+
+#selector-header {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#difficulty-selector {
+    width: 500px;
+    height: 60vh;
+}
+
+#x-icon {
+    cursor: pointer;
+    margin-right: 7px;
+    margin-top: -7px;
+    float: right;
+    font-size: 35pt;
+}
+
+#x-icon:hover {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+#form-container {
+    color: #183059;
+    font-size: 25px;
+    margin-left: 8px;
+    width: 100%;
+    font-family: 'Lato';
+    font-weight: 'bold';
+}
+
+.form-option {
+    margin-bottom: 20px;
+}
+
+#save-difficulty-btn {
+    cursor: pointer;
+    margin-left: 15px;
+    font-size: 25px;
+    padding: 5px;
+    width: 80px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #183059;
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    position: absolute;
+    bottom: 50px;
+}
+
+#gameend-filter {
+    display: none;
+}
+
+#gameend-popup {
+    display: none;
+    text-align: center;
+    padding: 40px;
+    width: 350px;
+    height: 250px;
+}
+
+#play-again-button {
+    cursor: pointer;
+    font-size: 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #183059;
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    position: relative;
+    margin-top: 40px
+}
+
+#gameend-message {
+    font-size: 25pt;
+}
+
+#current-score {
+    float: left;
+    margin-top: 30px;
+    width: 50%;
+    font-size: 20px;
+}
+
+#high-score {
+    float: right;
+    margin-top: 30px;
+    width: 50%;
+    font-size: 20px;
+}
+
+#custom-settings {
+    margin-bottom: 50px;
+}
+
+#custom-settings h2 {
+    width: 100%;
+}
+
+#custom-settings h3 {
+    font-family: 'Lato', sans-serif;
+    margin-left: 15px;
+    color: #183059;
+    font-size: 20px;
+}
+
+#custom-selector-header {
+    margin-bottom: 25px;
+}
+
+.custom-selector>* {
+    display: inline-block;
+}
+
+.custom-selector {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.show-selection {
+    width: 50px;
+    border: 1px solid;
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-size: 16pt;
+}
+
+.selector-btn {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-size: 15pt;
+}

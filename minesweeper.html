@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Minesweeper</title>
+    <link rel='icon' type='image/png' href='./assets/icon.png'>
+    <link rel='stylesheet' type='text/css' href='./style.css'>
+</head>
+
+<body>
+    <div id='preload' style='display: none'>
+        <img id='mine' src='./assets/mine.svg' width='1' height='1' alt='mine_image' />
+        <img id='flag' src='./assets/flag.svg' width='1' height='1' alt='flag_image' />
+        <img id='crossed_flag' src='./assets/crossed-flag.svg' width='1' height='1' alt='crossed_flag_image' />
+    </div>
+
+    <div id='blur-filter'></div>
+
+    <div id='stage'>
+
+        <div id='header'>
+            <div id='counter-container'>
+                <h2>Flags Left</h2>
+                <h1 id='count-flags'>0</h1>
+            </div>
+
+            <div id='timer-container'>
+                <h2>Seconds</h2>
+                <h1 id='timer'>0</h1>
+            </div>
+        </div>
+
+        <div id='container'>
+            <canvas id='gameboard' width='700' height='700'></canvas>
+        </div>
+
+    </div>
+
+    <button id='option-btn'>Options<img src='./assets/settings.svg'/></button>
+
+    <div id='selector-filter' class='gray-filter'></div>
+    <div id='difficulty-selector' class='popup-interface'>
+
+        <div id='selector-header'>
+            <h2>Difficulty</h2>
+            <div id='x-icon'>×</div>
+        </div>
+
+        <div id='form-container'><br><br>
+            <form name='difficulty_selector'>
+                <input id='choice-easy' type='radio' class='form-option' name='difficulty' value='EASY'>
+                <label for='EASY'>Beginner</label><br>
+                <input id='choice-medium' type='radio' class='form-option' name='difficulty' value='MEDIUM'>
+                <label for='MEDIUM'>Intermediate</label><br>
+                <input id='choice-hard' type='radio' class='form-option' name='difficulty' value='HARD'>
+                <label for='HARD'>Advanced</label><br>
+            </form>
+        </div>
+
+        <div id='custom-settings'>
+            <h2 id='custom-selector-header'>Custom Settings</h2>
+            <h3>Grid Size: </h3>
+            <div class='custom-selector'>
+                <button id='custom-size-minus' class='selector-btn'>-</button>
+                <div id='custom-size' class='show-selection'>40</div>
+                <button id='custom-size-add' class='selector-btn'>+</button>
+            </div>
+
+            <h3>Number of Mines: </h3>
+            <div class='custom-selector'>
+                <button id='custom-mines-minus' class='selector-btn'>-</button>
+                <div id='custom-mines' class='show-selection'>4</div>
+                <button id='custom-mines-add' class='selector-btn'>+</button>
+            </div>
+            <button id='save-difficulty-btn'>Save</button>
+        </div>
+    </div>
+
+    <div id='gameend-filter' class='gray-filter'></div>
+    <div id='gameend-popup' class='popup-interface'>
+        <h2 id='gameend-message'>Gamestate</h2>
+
+        <div id='score-container'>
+            <div id='current-score'>
+                <h2>Score</h2>
+                <h2 id='show-score'>-- : --</h2>
+            </div>
+            <div id='high-score'>
+                <h2>High Score</h2>
+                <h2 id='show-highscore'>-- : --</h2>
+            </div>
+        </div>
+
+        <button id='play-again-button'>New Game</button>
+    </div>
+
+    <script src='./gameboard_obfuscated.js'></script>
+</body>
+
+</html>
