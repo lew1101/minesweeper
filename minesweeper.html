@@ -36,14 +36,31 @@
 
     </div>
 
-    <button id='option-btn'>Options<img src='./assets/settings.svg'/></button>
+    <div id='menu'>
+        <button id='option-btn' class='menu-button'>Options<img src='./assets/settings.png'/></button>
+        <button id='how-to-play-btn' class='menu-button'>How to Play</button>
+    </div>
+
+    <div id='instructions-filter' class='gray-filter'></div>
+    <div id='instructions-popup' class='popup-interface'>
+        <h2>How to Play: </h2>
+        <div id='instructions-close' class='x-icon'>×</div>
+        <div id='instructions-paragraph'>
+            <p>
+                Welcome to Minesweeper. If you're a Windows' user, chances are that you already have the game on your computer. <br><br> The goal of the game is simple, and it is to flag all of the mines and reveal all non-mine tiles without setting a
+                mine off. When you click a tile on the game board, numbers appear. The numbers denote the number of mines adjacent to it. The number tells you the number of mines that are either above, below, left, right, and diagonally from the tile.
+                <br><br><b>Left Click: Reveal Tile <br> Right Click: Flag Tile</b><br><br> If you're still stuck, click <a href='https://www.youtube.com/watch?v=dvvrOeITzG8' target="_blank">here</a>!
+            </p>
+        </div>
+    </div>
+
 
     <div id='selector-filter' class='gray-filter'></div>
     <div id='difficulty-selector' class='popup-interface'>
+        <div id='difficulty-close' class='x-icon'>×</div>
 
         <div id='selector-header'>
             <h2>Difficulty</h2>
-            <div id='x-icon'>×</div>
         </div>
 
         <div id='form-container'><br><br>
@@ -79,6 +96,10 @@
     <div id='gameend-filter' class='gray-filter'></div>
     <div id='gameend-popup' class='popup-interface'>
         <h2 id='gameend-message'>Gamestate</h2>
+        <div id='show-game-settings'>
+            <h3>Grid Size: <span id='ending-size'>size</span></h3>
+            <h3> Mines: <span id='ending-mines'>mines</span></h3>
+        </div>
 
         <div id='score-container'>
             <div id='current-score'>
@@ -94,7 +115,10 @@
         <button id='play-again-button'>New Game</button>
     </div>
 
-    <script src='./gameboard_obfuscated.js'></script>
+    <script src='./constants.js'></script>
+    <script src='./game_statistics.js'></script>
+    <script src='./gameboard.js'></script>
+    <script src='./interface.js'></script>
 </body>
 
 </html>

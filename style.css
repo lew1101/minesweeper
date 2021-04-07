@@ -63,28 +63,35 @@ div#container {
     float: bottom;
 }
 
-#option-btn {
+#menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 150px;
+}
+
+.menu-button {
+    display: block;
     cursor: pointer;
-    float: right;
-    margin: 10px;
-    font-size: 16px;
     border-radius: 5px;
-    width: 110px;
+    font-size: 20px;
     padding: 10px;
     background: white;
+    width: 100%;
     font-weight: bold;
     color: #183059;
     font-family: 'Lato', sans-serif;
     border: none;
-    text-align: left;
+    text-align: center;
     text-decoration: none;
     z-index: 1;
+    margin-bottom: 15px;
 }
 
-#option-btn img {
+.menu-button img {
     /* settings img */
-    width: 17px;
-    height: 17px;
+    width: 19px;
+    height: 19px;
     vertical-align: middle;
     margin-left: 10px;
 }
@@ -123,6 +130,8 @@ div#container {
     transform: translate(-50%, -50%);
     background: rgba(255, 255, 255, 0.8);
     z-index: 1000;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 #difficulty-selector h2 {
@@ -142,15 +151,15 @@ div#container {
     height: 60vh;
 }
 
-#x-icon {
+.x-icon {
+    position: fixed;
     cursor: pointer;
-    margin-right: 7px;
-    margin-top: -7px;
-    float: right;
+    top: 25px;
+    right: 25px;
     font-size: 35pt;
 }
 
-#x-icon:hover {
+.x-icon:hover {
     color: rgba(0, 0, 0, 0.5);
 }
 
@@ -169,17 +178,17 @@ div#container {
 
 #save-difficulty-btn {
     cursor: pointer;
+    position: relative;
     margin-left: 15px;
     font-size: 25px;
     padding: 5px;
+    margin-top: 30px;
     width: 80px;
     border-radius: 5px;
     font-weight: bold;
     color: #183059;
     text-align: center;
     font-family: 'Lato', sans-serif;
-    position: absolute;
-    bottom: 50px;
 }
 
 #gameend-filter {
@@ -190,8 +199,8 @@ div#container {
     display: none;
     text-align: center;
     padding: 40px;
-    width: 350px;
-    height: 250px;
+    width: 400px;
+    height: 280px;
 }
 
 #play-again-button {
@@ -203,23 +212,31 @@ div#container {
     text-align: center;
     font-family: 'Lato', sans-serif;
     position: relative;
-    margin-top: 40px
+    margin-top: 40px;
 }
 
 #gameend-message {
     font-size: 25pt;
 }
 
+#show-game-settings h3 {
+    font-family: 'Lato', sans-serif;
+    margin: 15px;
+    display: inline-block;
+    font-size: 18px;
+    color: #183059;
+}
+
 #current-score {
     float: left;
-    margin-top: 30px;
+    margin-top: 15px;
     width: 50%;
     font-size: 20px;
 }
 
 #high-score {
     float: right;
-    margin-top: 30px;
+    margin-top: 15px;
     width: 50%;
     font-size: 20px;
 }
@@ -234,7 +251,7 @@ div#container {
 
 #custom-settings h3 {
     font-family: 'Lato', sans-serif;
-    margin-left: 15px;
+    margin-left: 20px;
     color: #183059;
     font-size: 20px;
 }
@@ -266,4 +283,32 @@ div#container {
     text-align: center;
     font-family: 'Lato', sans-serif;
     font-size: 15pt;
+}
+
+#instructions-filter,
+#instructions-popup {
+    display: none;
+}
+
+#instructions-popup {
+    padding: 30px;
+    width: 450px;
+    height: 60vh;
+}
+
+#instructions-popup h2 {
+    margin-top: 12px;
+    font-size: 25px;
+}
+
+#instructions-paragraph {
+    margin-top: 25px;
+    text-align: justify;
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+    color: #183059;
+}
+
+#instructions-close {
+    right: 40px
 }

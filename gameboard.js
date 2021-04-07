@@ -4,287 +4,6 @@ Intermediate – 16 * 16 Board and 40 Mines
 Advanced – 24 * 24 Board and 99 Mines
 */
 
-/* ---- CONSTANTS AND DECLARATIONS ----- */
-
-const CANVAS_SCALER = 0.73 // 1 = 100% vmin
-const DEFAULT_DIFFICULTY = 'MEDIUM'
-
-const SIZE_MIN = 4;
-const SIZE_MAX = 40;
-const MINES_MAX = 199;
-const MINES_MIN = 7;
-
-const DIFFICULTY = {
-    'EASY': { 'size': 9, 'mines': 10 },
-    'MEDIUM': { 'size': 16, 'mines': 40 },
-    'HARD': { 'size': 24, 'mines': 99 }
-}
-
-let CURRENT_SIZE = DIFFICULTY[DEFAULT_DIFFICULTY].size;
-let CURRENT_MINES = DIFFICULTY[DEFAULT_DIFFICULTY].mines;
-
-images_preload = { //fetch from html (how did this solution take me 3hrs to think of bruh im dum) 
-    'mine': document.getElementById('mine'), // uh oh stinky poopy
-    'flag': document.getElementById('flag'),
-    'crossed_flag': document.getElementById('crossed_flag')
-}
-
-let HIGH_SCORE = null //secs
-
-
-
-
-/* -------- OPTIONS PAGE -------- */
-let settings_button = document.getElementById('option-btn');
-let selector_filter = document.getElementById('selector-filter');
-let popup = document.getElementById('difficulty-selector');
-let x_icon = document.getElementById('x-icon');
-let oRadio = document.forms[0].elements['difficulty'];
-let save_difficulty_button = document.getElementById('save-difficulty-btn');
-
-let cs_size = document.getElementById('custom-size');
-let cs_mines = document.getElementById('custom-mines');
-
-let size_minus_button = document.getElementById('custom-size-minus');
-let size_add_button = document.getElementById('custom-size-add');
-let mines_minus_button = document.getElementById('custom-mines-minus');
-let mines_add_button = document.getElementById('custom-mines-add');
-
-let temp_size = 0;
-let temp_mines = 0;
-
-
-setDefaultCheckedValue(DEFAULT_DIFFICULTY)
-
-settings_button.addEventListener('click', evt => { // show menu when settings_button.click
-    showGameOptions(true);
-    setDefaultCheckedValue(DEFAULT_DIFFICULTY) //  set form option to current difficulty
-    temp_size = CURRENT_SIZE;
-    temp_mines = CURRENT_MINES;
-    cs_size.innerHTML = temp_size;
-    cs_mines.innerHTML = temp_mines;
-});
-
-selector_filter.addEventListener('click', evt => { //if click outside of box -> close menu
-    showGameOptions(false);
-});
-
-x_icon.addEventListener('click', evt => { // exit menu
-    showGameOptions(false);
-});
-
-save_difficulty_button.addEventListener('click', evt => { // bind save button to save difficulty and execute
-    CURRENT_SIZE = temp_size;
-    CURRENT_MINES = temp_mines;
-    resetGame(CURRENT_SIZE, CURRENT_MINES);
-    showGameOptions(false);
-});
-
-size_add_button.addEventListener('click', evt => {
-    temp_size += 1;
-    cs_size.innerHTML = temp_size;
-    uncheckAllRadio();
-    checkIncrementButtons();
-});
-
-size_minus_button.addEventListener('click', evt => {
-    temp_size -= 1;
-    cs_size.innerHTML = temp_size;
-    uncheckAllRadio();
-    checkIncrementButtons();
-});
-
-mines_add_button.addEventListener('click', evt => {
-    temp_mines += 1;
-    cs_mines.innerHTML = temp_mines;
-    uncheckAllRadio();
-    checkIncrementButtons();
-
-});
-
-mines_minus_button.addEventListener('click', evt => {
-    temp_mines -= 1;
-    cs_mines.innerHTML = temp_mines;
-    uncheckAllRadio();
-    checkIncrementButtons();
-});
-
-function checkIncrementButtons() {
-    size_minus_button.disabled = temp_size <= SIZE_MIN;
-    size_add_button.disabled = temp_size >= SIZE_MAX;
-    if (temp_mines > ((temp_size * temp_size) - 11)) {
-        temp_mines = (temp_size * temp_size) - 11;
-        cs_mines.innerHTML = temp_mines;
-        mines_add_button.disabled = true;
-    } else {
-        mines_add_button.disabled = temp_mines >= MINES_MAX;
-    }
-    mines_minus_button.disabled = temp_mines <= MINES_MIN;
-}
-
-let choice_easy = document.getElementById('choice-easy');
-let choice_medium = document.getElementById('choice-medium');
-let choice_hard = document.getElementById('choice-hard');
-
-choice_easy.addEventListener('change', evt => {
-    temp_size = 9;
-    temp_mines = 10;
-    cs_size.innerHTML = temp_size;
-    cs_mines.innerHTML = temp_mines;
-    checkIncrementButtons();
-});
-
-choice_medium.addEventListener('change', evt => {
-    temp_size = 16;
-    temp_mines = 40;
-    cs_size.innerHTML = temp_size;
-    cs_mines.innerHTML = temp_mines;
-    checkIncrementButtons();
-});
-
-choice_hard.addEventListener('change', evt => {
-    temp_size = 24;
-    temp_mines = 99;
-    cs_size.innerHTML = temp_size;
-    cs_mines.innerHTML = temp_mines;
-    checkIncrementButtons();
-});
-
-
-function showGameOptions(bool) { // whether show settings or not
-    selector_filter.style.display = bool ? 'block' : 'none';
-    popup.style.display = bool ? 'block' : 'none';
-}
-
-function uncheckAllRadio() {
-    for (var i = 0; i < oRadio.length; i++) {
-        oRadio[i].checked = false;
-    }
-}
-
-function setDefaultCheckedValue(value) { // give form default value
-    for (var i = 0; i < oRadio.length; i++) {
-        let d = DIFFICULTY[oRadio[i].value]
-        if (d.size == CURRENT_SIZE && d.mines == CURRENT_MINES) {
-            oRadio[i].checked = true;
-        } else {
-            oRadio[i].checked = false;
-        }
-    }
-}
-
-
-/* ------ GAME END POPUP ------ */
-
-let gameend_filter = document.getElementById('gameend-filter');
-let gameend_popup = document.getElementById('gameend-popup')
-let message = document.getElementById('gameend-message')
-let current_score = document.getElementById('show-score');
-let high_score = document.getElementById('show-highscore')
-let play_again_button = document.getElementById('play-again-button')
-
-function showGameEndMessage(state) {
-    const time = getTime();
-
-    if (state == 1) {
-        if (time < HIGH_SCORE || !HIGH_SCORE) {
-            message.innerHTML = 'New High Score!';
-            HIGH_SCORE = time;
-        } else {
-            message.innerHTML = 'You Win!';
-        }
-        current_score.innerHTML = secToMin(time);
-        high_score.innerHTML = secToMin(HIGH_SCORE);
-    } else if (state == 0) {
-        message.innerHTML = 'You Lose!';
-        current_score.innerHTML = secToMin(time);
-        high_score.innerHTML = secToMin(HIGH_SCORE);
-    }
-
-
-    gameend_popup.style.display = 'block';
-    gameend_filter.style.display = 'block';
-}
-
-play_again_button.addEventListener('click', evt => {
-    gameend_popup.style.display = 'none';
-    gameend_filter.style.display = 'none';
-    resetGame(CURRENT_SIZE, CURRENT_MINES)
-});
-
-
-
-
-
-/* -------- FLAGS LEFT COUNTER METHODS -------- */
-const flags_left = document.getElementById('count-flags');
-let count = 0;
-
-function setMineCount(value) {
-    count = value;
-    flags_left.innerHTML = value;
-}
-
-function addMineCount(value) {
-    count += value;
-    flags_left.innerHTML = count;
-}
-
-function resetMineCount() {
-    count = 0
-    flags_left.innerHTML = 0
-}
-
-/* ------ TIMER METHODS --------- */
-const timer_cap = 999
-const timer = document.getElementById('timer');
-let time = 0;
-let intervalID;
-
-function initiateTimer() {
-    time = 0;
-    timer.innerHTML = 0;
-    intervalID = window.setInterval(evt => {
-        if (time < timer_cap) {
-            time++;
-            timer.innerHTML = time
-        } else {
-            freezeTimer();
-        }
-
-    }, 1000);
-}
-
-function freezeTimer() {
-    if (intervalID) {
-        window.clearInterval(intervalID);
-        return time;
-    }
-}
-
-function resetTimer() {
-    freezeTimer();
-    time = 0;
-    timer.innerHTML = 0;
-}
-
-function getTime() {
-    return time
-}
-
-function secToMin(s) {
-    let min = Math.floor(s / 60);
-    let sec = s - (min * 60);
-
-    min = min.toString().length % 2 ? '0' + min : min;
-    sec = sec.toString().length % 2 ? '0' + sec : sec
-
-    return min + ' : ' + sec
-}
-
-
-
-
 /* -------------- CANVAS ------------------- */
 
 /* ------- Tile Constructor ------- */
@@ -297,24 +16,6 @@ class Tile {
         this.isFlagged = false;
         this.isRevealed = false;
     }
-}
-
-let DEFAULT_COLOR = '#a7d34f';
-let PARITY_COLOR = '#9dc94b';
-let HIGHLIGHT_COLOR = '#bcdb7d';
-let REVEALED_DEFAULT_COLOR = '#e5c29f';
-let REVEALED_PARITY_COLOR = '#d2bb9b';
-let REVEALED_HIGHLIGHT_COLOR = '#e3ccb6';
-
-let TEXT_STYLE = { // give splash of color to text
-    '1': '#387CE1',
-    '2': '#DA2727',
-    '3': '#4F9E33',
-    '4': '#9627DA',
-    '5': '#E18938',
-    '6': '#2AC39F',
-    '7': '#DB23C8',
-    '8': '#DEBF1D',
 }
 
 
@@ -530,8 +231,8 @@ class Gameboard {
 
     populateMines(num) {
         if (num > ((this.size * this.size) - 9)) {
-            console.log(this.size, Error('Too little squares to place mines'));
-            return; 
+            alert(Error('Too little squares to place mines'));
+            return;
         } else {
             let mines_placed = 0;
             while (mines_placed < num) {
@@ -658,6 +359,9 @@ class Gameboard {
             }
         }
         this.numerateTiles(); // crucial -> gives tiles numbers
+        if (PRINT_SOLUTION) {
+            this.print();
+        }
         initiateTimer();
     }
 
@@ -714,6 +418,7 @@ class Gameboard {
             '8': '\x1b[32m',
         }
         let output = '';
+        let total_mines = 0;
         for (let y = 0; y < this.size; y++) {
             for (let x = 0; x < this.size; x++) {
                 const tile = this.board[x][y]
@@ -723,6 +428,7 @@ class Gameboard {
                             output += ' ';
                             break;
                         case 'mine':
+                            total_mines += 1;
                             output += color_codes['mine'] + 'X' + color_codes['escape'];
                             break;
                         default:
@@ -739,6 +445,7 @@ class Gameboard {
         }
 
         console.log(output)
+        console.log('Total Mines: ' + total_mines)
     }
 }
 
