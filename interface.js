@@ -178,7 +178,6 @@ function showGameEndMessage(state) { //
 
     if (state == 1) {
         let isHighScore = validateHighScore(CURRENT_SIZE, CURRENT_MINES, time);
-        console.log(isHighScore);
         message.innerHTML = isHighScore ? 'New High Score!' : 'You Win!';
         current_score.innerHTML = secToMin(time);
         high_score.innerHTML = secToMin(getHighScore(CURRENT_SIZE, CURRENT_MINES));

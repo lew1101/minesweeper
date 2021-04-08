@@ -8,7 +8,7 @@ const SIZE_MIN = 4;
 const SIZE_MAX = 40;
 const MINES_MAX = 199;
 const MINES_MIN = 7;
-const PRINT_SOLUTION = false; // prints solution in console
+const PRINT_SOLUTION = true; // prints solution in console
 
 const DIFFICULTY = {
     'EASY': { 'size': 9, 'mines': 10 },
