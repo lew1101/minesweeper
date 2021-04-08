@@ -43,74 +43,23 @@ class Gameboard {
         //event listeners
         this.lastTile = -1;
         this.canvas.addEventListener('mousemove', evt => { //check if hover on tile
-            evt.target.style.cursor = 'pointer';
-            const tileX = ~~(evt.offsetX / this.tile_length);
-            const tileY = ~~(evt.offsetY / this.tile_length);
-            const tileNum = tileX + this.canvas.width / this.tile_length * tileY;
-
-            if (this.lastTile == -1 || this.lastTile != tileNum) {
-                this.lastTile = tileNum;
-                this.clearCanvas();
-                this.draw();
-            }
+            this.highlight(evt);
         });
 
         this.canvas.addEventListener("mouseout", evt => { //check if mouse leave canvas
-            this.lastTile = -1;
-            this.clearCanvas();
-            this.draw();
+            this.mouseOut();
         });
 
         this.canvas.addEventListener("click", evt => { // check if leftclick on tile
-            if (!this.gameOver) {
-
-                const tileX = ~~(evt.offsetX / this.tile_length);
-                const tileY = ~~(evt.offsetY / this.tile_length);
-                const tile = this.board[tileX][tileY];
-                if (!this.gameStarted) { // starting sequence
-                    this.gameStarted = true;
-                    this.startGame(tile);
-                    tile.isRevealed = true;
-                    this.revealAdjacentEmptyTiles(tile);
-
-                } else if (!tile.isFlagged && !tile.isRevealed) { // if tile not flagged
-                    tile.isRevealed = true;
-                    this.revealAdjacentEmptyTiles(tile);
-
-                } else if (tile.isFlagged) { // if tile is flag
-                    this.mines_left += 1
-                    tile.isFlagged = false;
-
-                }
-
-                this.checkGameState();
-                this.clearCanvas();
-                this.draw();
+            if (evt.ctrlKey || evt.metaKey) {
+                this.rightClick(evt);
+            } else {
+                this.leftClick(evt);
             }
         });
 
         this.canvas.addEventListener("contextmenu", evt => { // check if rightclick on tile
-            evt.preventDefault();
-            if (!this.gameOver) {
-                const tileX = ~~(evt.offsetX / this.tile_length);
-                const tileY = ~~(evt.offsetY / this.tile_length);
-                const tile = this.board[tileX][tileY];
-
-                if (this.mines_left > 0 && !tile.isRevealed && !tile.isFlagged) {
-                    tile.isFlagged = true;
-                    this.mines_left -= 1
-                    addMineCount(-1);
-
-                } else if (tile.isFlagged) {
-                    tile.isFlagged = false;
-                    this.mines_left += 1
-                    addMineCount(1);
-                }
-
-                this.checkGameState();
-                this.clearCanvas();
-                this.draw();
-            }
+            this.rightClick(evt)
         });
     }
 
@@ -175,6 +124,77 @@ class Gameboard {
                 }
             }
         }
+    }
+
+    leftClick(evt) {
+        if (!this.gameOver) {
+
+            const tileX = ~~(evt.offsetX / this.tile_length);
+            const tileY = ~~(evt.offsetY / this.tile_length);
+            const tile = this.board[tileX][tileY];
+            if (!this.gameStarted) { // starting sequence
+                this.gameStarted = true;
+                this.startGame(tile);
+                tile.isRevealed = true;
+                this.revealAdjacentEmptyTiles(tile);
+
+            } else if (!tile.isFlagged && !tile.isRevealed) { // if tile not flagged
+                tile.isRevealed = true;
+                this.revealAdjacentEmptyTiles(tile);
+
+            } else if (tile.isFlagged) { // if tile is flag
+                this.mines_left += 1
+                tile.isFlagged = false;
+
+            }
+
+            this.checkGameState();
+            this.clearCanvas();
+            this.draw();
+        }
+    }
+
+    rightClick(evt) {
+        evt.preventDefault();
+        if (!this.gameOver) {
+            const tileX = ~~(evt.offsetX / this.tile_length);
+            const tileY = ~~(evt.offsetY / this.tile_length);
+            const tile = this.board[tileX][tileY];
+
+            if (this.mines_left > 0 && !tile.isRevealed && !tile.isFlagged) {
+                tile.isFlagged = true;
+                this.mines_left -= 1
+                addMineCount(-1);
+
+            } else if (tile.isFlagged) {
+                tile.isFlagged = false;
+                this.mines_left += 1
+                addMineCount(1);
+            }
+
+            this.checkGameState();
+            this.clearCanvas();
+            this.draw();
+        }
+    }
+
+    highlight(evt) {
+        evt.target.style.cursor = 'pointer';
+        const tileX = ~~(evt.offsetX / this.tile_length);
+        const tileY = ~~(evt.offsetY / this.tile_length);
+        const tileNum = tileX + this.canvas.width / this.tile_length * tileY;
+
+        if (this.lastTile == -1 || this.lastTile != tileNum) {
+            this.lastTile = tileNum;
+            this.clearCanvas();
+            this.draw();
+        }
+    }
+
+    mouseOut() {
+        this.lastTile = -1;
+        this.clearCanvas();
+        this.draw();
     }
 
     resetCanvas() {
