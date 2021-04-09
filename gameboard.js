@@ -436,26 +436,28 @@ class Gameboard {
         for (let y = 0; y < this.size; y++) {
             for (let x = 0; x < this.size; x++) {
                 const tile = this.board[x][y]
-                if (!tile.isFlagged) {
-                    switch (tile.value) {
-                        case null:
-                            output += ' ';
-                            break;
-                        case 'mine':
-                            total_mines += 1;
-                            output += color_codes['mine'] + 'X' + color_codes['escape'];
-                            break;
-                        default:
-                            output += color_codes[tile.value] + tile.value + color_codes['escape']
-                            break;
-                    }
-                } else {
-                    output += color_codes['flag'] + '⚐' + color_codes['escape'];
-                    break;
+                switch (tile.value) {
+                    case null:
+                        output += ' ';
+                        break;
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                        output += color_codes['mine'] + tile.value + color_codes['escape'];
+                        break;
+                    case 'mine':
+                        total_mines += 1;
+                        output += color_codes['mine'] + 'X' + color_codes['escape'];
+                        break;
                 }
-                output += '   '
+                output += '   ' // add space
             }
-            output += '\n\n'
+            output += '\n\n' // new line
         }
 
         console.log(output)
