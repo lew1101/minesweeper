@@ -92,15 +92,8 @@ class Gameboard {
 
                 this.ctx.fillRect(xx, yy, this.tile_length, this.tile_length); // draw tile
 
-                if (!tile.isFlagged) { // not flagged
+                if (tile.isRevealed && !tile.isFlagged && tile.value != null) { // is revealed, not flagged, and not empty tile
                     switch (tile.value) { // add image or text
-                        case null:
-                            break;
-                        case 'mine':
-                            if (tile.isRevealed) {
-                                this.ctx.drawImage(images_preload['mine'], xx + image_offset, yy + image_offset, this.tile_length * 0.85, this.tile_length * 0.85);
-                            }
-                            break;
                         case '1':
                         case '2':
                         case '3':
@@ -109,12 +102,14 @@ class Gameboard {
                         case '6':
                         case '7':
                         case '8':
-                            if (tile.isRevealed) {
-                                this.ctx.fillStyle = TEXT_STYLE[tile.value];
-                                this.ctx.fillText(tile.value, xx + text_offset, yy + text_offset);
-                                break;
-                            }
+                            this.ctx.fillStyle = TEXT_STYLE[tile.value];
+                            this.ctx.fillText(tile.value, xx + text_offset, yy + text_offset);
+                            break;
+                        default: // runs if not number       this is here for future support, so that if future features are added, the images will be rendered
+                            this.ctx.drawImage(images_preload[tile.value], xx + image_offset, yy + image_offset, this.tile_length * 0.85, this.tile_length * 0.85);
+                            break;
                     }
+                    console.log(tile.value)
                 } else if (tile.isFlagged) { //flagged
                     if (tile.value == 'crossed_flag') {
                         this.ctx.drawImage(images_preload['crossed_flag'], xx + image_offset, yy + image_offset, this.tile_length * 0.85, this.tile_length * 0.85);
