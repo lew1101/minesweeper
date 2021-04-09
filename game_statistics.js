@@ -32,20 +32,20 @@ function getHighScore(size, mines) {
 
 /* -------- FLAGS LEFT COUNTER METHODS -------- */
 const flags_left = document.getElementById('count-flags');
-let count = 0;
+let mine_count = 0;
 
 function setMineCount(value) {
-    count = value;
+    mine_count = value;
     flags_left.innerHTML = value;
 }
 
 function addMineCount(value) {
-    count += value;
-    flags_left.innerHTML = count;
+    mine_count += value;
+    flags_left.innerHTML = mine_count;
 }
 
 function resetMineCount() {
-    count = 0
+    mine_count = 0
     flags_left.innerHTML = 0
 }
 
