@@ -43,27 +43,27 @@ class Gameboard {
         //event listeners
         this.lastTile = -1;
         this.canvas.addEventListener('mousemove', evt => { //check if hover on tile
-            this.highlight(evt);
+            this.highlightHoveredTile(evt);
         });
 
         this.canvas.addEventListener("mouseout", evt => { //check if mouse leave canvas
-            this.mouseOut();
+            this.mouseOutEvent();
         });
 
         this.canvas.addEventListener("click", evt => { // check if leftclick on tile
             if (evt.ctrlKey || evt.metaKey) {
-                this.rightClick(evt);
+                this.rightClickEvent(evt);
             } else {
-                this.leftClick(evt);
+                this.leftClickEvent(evt);
             }
         });
 
         this.canvas.addEventListener("contextmenu", evt => { // check if rightclick on tile
-            this.rightClick(evt)
+            this.rightClickEvent(evt)
         });
     }
 
-    draw() {
+    drawCanvas() {
         this.ctx.fillStyle = '#FFFFFF';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height) //draw white backdrop
 
@@ -120,7 +120,11 @@ class Gameboard {
         }
     }
 
-    leftClick(evt) {
+    clearCanvas() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+
+    leftClickEvent(evt) {
         if (!this.gameOver) {
 
             const tileX = ~~(evt.offsetX / this.tile_length);
@@ -144,11 +148,11 @@ class Gameboard {
 
             this.checkGameState();
             this.clearCanvas();
-            this.draw();
+            this.drawCanvas();
         }
     }
 
-    rightClick(evt) {
+    rightClickEvent(evt) {
         evt.preventDefault();
         if (!this.gameOver) {
             const tileX = ~~(evt.offsetX / this.tile_length);
@@ -168,11 +172,11 @@ class Gameboard {
 
             this.checkGameState();
             this.clearCanvas();
-            this.draw();
+            this.drawCanvas();
         }
     }
 
-    highlight(evt) {
+    highlightHoveredTile(evt) {
         evt.target.style.cursor = 'pointer';
         const tileX = ~~(evt.offsetX / this.tile_length);
         const tileY = ~~(evt.offsetY / this.tile_length);
@@ -181,14 +185,14 @@ class Gameboard {
         if (this.lastTile == -1 || this.lastTile != tileNum) {
             this.lastTile = tileNum;
             this.clearCanvas();
-            this.draw();
+            this.drawCanvas();
         }
     }
 
-    mouseOut() {
+    mouseOutEvent() {
         this.lastTile = -1;
         this.clearCanvas();
-        this.draw();
+        this.drawCanvas();
     }
 
     resetCanvas() {
@@ -196,7 +200,7 @@ class Gameboard {
         this.tile_length = this.full_sidelength / this.size;
         this.ctx.font = 'bold ' + String(this.tile_length / 2) + 'pt Arial';
         this.clearCanvas();
-        this.draw();
+        this.drawCanvas();
     }
 
     resetGame() { // reset and init game
@@ -206,7 +210,7 @@ class Gameboard {
         this.gameStarted = false;
         this.board = this.createBoard();
         this.clearCanvas();
-        this.draw();
+        this.drawCanvas();
     }
 
     reconfigure(n, mines) { // alters gameboard settings, resets, and inits game
@@ -223,10 +227,6 @@ class Gameboard {
         this.mines = mines
 
         this.resetGame();
-    }
-
-    clearCanvas() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
     createBoard() {
@@ -294,7 +294,7 @@ class Gameboard {
                 }
             }
         }
-        this.draw()
+        this.drawCanvas()
     }
 
     revealAllTiles() {
@@ -303,7 +303,7 @@ class Gameboard {
                 this.board[x][y].isRevealed = true;
             }
         }
-        this.draw()
+        this.drawCanvas()
     }
 
     revealAdjacentEmptyTiles(tile) {
@@ -487,7 +487,7 @@ resizeCanvas();
 let settings = DIFFICULTY[DEFAULT_DIFFICULTY]
 setMineCount(settings.mines)
 let gameboard = new Gameboard(canvas, ctx, settings.size, settings.mines);
-gameboard.draw();
+gameboard.drawCanvas();
 
 window.addEventListener('resize', evt => { // if window resize -> resize canvas 
     resizeCanvas();
