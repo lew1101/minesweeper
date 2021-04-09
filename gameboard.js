@@ -109,7 +109,6 @@ class Gameboard {
                             this.ctx.drawImage(images_preload[tile.value], xx + image_offset, yy + image_offset, this.tile_length * 0.85, this.tile_length * 0.85);
                             break;
                     }
-                    console.log(tile.value)
                 } else if (tile.isFlagged) { //flagged
                     if (tile.value == 'crossed_flag') {
                         this.ctx.drawImage(images_preload['crossed_flag'], xx + image_offset, yy + image_offset, this.tile_length * 0.85, this.tile_length * 0.85);
@@ -451,7 +450,7 @@ class Gameboard {
                             break;
                     }
                 } else {
-                    output += color_codes['flag'] + '|' + color_codes['escape'];
+                    output += color_codes['flag'] + '⚐' + color_codes['escape'];
                     break;
                 }
                 output += '   '
