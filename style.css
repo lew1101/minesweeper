@@ -2,12 +2,14 @@
 body {
     background: #DB6713;
     background: linear-gradient(95deg, #dba013, #df2445);
+    overscroll-behavior: none;
 }
 
 html {
     min-width: 550px;
     min-height: 700px;
     position: relative;
+    overscroll-behavior: none;
 }
 
 h1 {
