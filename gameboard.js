@@ -391,7 +391,7 @@ class Gameboard {
                 } else if (!this.board[x][y].isRevealed && !this.board[x][y].isFlagged) { //check if tile is revealed or flagged
                     gamestate = 0
 
-                } else if (this.board[x][y].value != 'mine' && this.board[x][y].isFlagged) { //check if tile has been incorrectly flagged
+                } else if (this.board[x][y].value == 'mine' && !this.board[x][y].isFlagged) { //check if tile has been incorrectly flagged
                     gamestate = 0
                 }
             }
