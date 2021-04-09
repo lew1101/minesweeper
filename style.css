@@ -24,6 +24,10 @@ h2 {
     font-size: 120%;
 }
 
+:focus {
+    outline: 0;
+}
+
 #blur-filter {
     position: fixed;
     top: 0;
@@ -76,7 +80,7 @@ div#container {
     border-radius: 5px;
     font-size: 20px;
     padding: 10px;
-    background: white;
+    background: rgb(255, 255, 255);
     width: 100%;
     font-weight: bold;
     color: #183059;
@@ -86,6 +90,10 @@ div#container {
     text-decoration: none;
     z-index: 1;
     margin-bottom: 15px;
+}
+
+.menu-button:hover {
+    background: rgba(255, 255, 255, 0.85)
 }
 
 .menu-button img {

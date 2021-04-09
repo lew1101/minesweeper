@@ -1,3 +1,11 @@
+/* ------- NEW GAME BTN ----------*/
+
+let new_game_button = document.getElementById('new-game-btn')
+new_game_button.addEventListener('click', evt => {
+    resetGame(CURRENT_SIZE, CURRENT_MINES);
+});
+
+
 /* ------- HOW TO PLAY PAGE -------- */
 
 let instructions_btn = document.getElementById('how-to-play-btn');
