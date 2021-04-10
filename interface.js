@@ -11,7 +11,7 @@ $('#gameend-close').click(evt => {
 
 /* ------- HOW TO PLAY PAGE -------- */
 
-$('#instructions_btn').click(evt => {
+$('#how-to-play-btn').click(evt => {
     $('#instructions-popup').css('display', 'block');
     $('#instructions-filter').css('display', 'block');
 });

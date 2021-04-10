@@ -85,7 +85,7 @@ function getTime() {
 }
 
 function secToMin(s) {
-    if (s == undefined) {
+    if (s == undefined || s == 999) {
         return '-- : --'
     }
     let min = Math.floor(s / 60);
