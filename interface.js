@@ -222,8 +222,8 @@ function onTouchStart(e) {
 function onTouchEnd(e) {
     touchEnd = e.timeStamp;
     if ((touchEnd - touchStart) >= duration) {
-        gameboard.rightClickEvent()
+        gameboard.rightClickEvent(e)
     } else {
-        gameboard.leftClickEvent();
+        gameboard.leftClickEvent(e);
     }
 }
