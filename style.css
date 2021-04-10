@@ -143,7 +143,7 @@ div#container {
     background: rgba(255, 255, 255, 0.7);
     z-index: 1000;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 #difficulty-selector h2 {
@@ -229,6 +229,10 @@ div#container {
 
 #gameend-message {
     font-size: 25pt;
+}
+
+#gameend-close {
+    margin-right: 7px;
 }
 
 #show-game-settings h3 {

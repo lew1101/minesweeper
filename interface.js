@@ -1,9 +1,13 @@
-/* ------- NEW GAME BTN ----------*/
+/* ------- NEW GAME SCREEN ----------*/
 
 $('#new-game-btn').click(evt => {
     resetGame(CURRENT_SIZE, CURRENT_MINES);
 });
 
+$('#gameend-close').click(evt => {
+    $('#gameend-popup').css('display', 'none');
+    $('#gameend-filter').css('display', 'none');
+});
 
 /* ------- HOW TO PLAY PAGE -------- */
 
