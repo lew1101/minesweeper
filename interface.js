@@ -159,7 +159,7 @@ function showGameEndMessage(state) { //
 
     if (state == 1) {
         let isHighScore = validateHighScore(CURRENT_SIZE, CURRENT_MINES, time);
-        $('#gameend-message').html(isHighScore) ? 'New High Score!' : 'You Win!';
+        $('#gameend-message').html(isHighScore ? 'New High Score!' : 'You Win!');
         $('#show-score').html(secToMin(time));
         $('#show-highscore').html(secToMin(getHighScore(CURRENT_SIZE, CURRENT_MINES)));
     } else if (state == 0) {
