@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Minesweeper</title>
+    <script src='lib/jquery-3.6.0.slim.min.js'></script>
+    <link rel='icon' type='image/png' href='assets/icon.png'>
+    <link rel='stylesheet' type='text/css' href='style.css'>
+</head>
+
+<body>
+    <div id='preload' style='display: none'>
+        <img id='mine' src='assets/mine.svg' width='1' height='1' alt='mine_image' />
+        <img id='flag' src='assets/flag.svg' width='1' height='1' alt='flag_image' />
+        <img id='crossed_flag' src='assets/crossed-flag.svg' width='1' height='1' alt='crossed_flag_image' />
+    </div>
+
+    <div id='blur-filter'></div>
+
+    <div id='stage'>
+
+        <div id='header'>
+            <div id='counter-container'>
+                <h2>Flags Left</h2>
+                <h1 id='count-flags'>0</h1>
+            </div>
+
+            <div id='timer-container'>
+                <h2>Seconds</h2>
+                <h1 id='timer'>0</h1>
+            </div>
+        </div>
+
+        <div id='container'>
+            <canvas id='gameboard' width='700' height='700'></canvas>
+        </div>
+
+    </div>
+
+    <div id='menu'>
+        <button id='option-btn' class='menu-button'>Options<img src='./assets/settings.png'/></button>
+        <button id='how-to-play-btn' class='menu-button'>How to Play</button>
+        <button id='new-game-btn' class='menu-button'>New Game</button>
+    </div>
+
+    <div id='instructions-filter' class='gray-filter'></div>
+    <div id='instructions-popup' class='popup-interface'>
+        <h2>How to Play: </h2>
+        <div id='instructions-close' class='x-icon'>×</div>
+        <div id='instructions-paragraph'>
+            <p>
+                Welcome to Minesweeper. If you're a Windows' user, chances are that you already have the game on your computer. <br><br> The goal of the game is simple, and it is to flag all of the mines and reveal all non-mine tiles without setting a
+                mine off. When you click a tile on the game board, numbers appear. The numbers denote the number of mines adjacent to it. The number tells you the number of mines that are either above, below, left, right, and diagonally from the tile.
+                <br><br><b>Left-click:</b> Reveal Tile <br><br><b>Right-click or Ctrl+click:</b> Flag Tile<br><br> If you're still stuck, click <a href='https://www.youtube.com/watch?v=dvvrOeITzG8' target="_blank">here</a>!
+            </p>
+        </div>
+    </div>
+
+
+    <div id='selector-filter' class='gray-filter'></div>
+    <div id='difficulty-selector' class='popup-interface'>
+        <div id='difficulty-close' class='x-icon'>×</div>
+
+        <div id='selector-header'>
+            <h2>Difficulty</h2>
+        </div>
+
+        <div id='form-container'><br><br>
+            <form name='difficulty_selector'>
+                <input id='choice-easy' type='radio' class='form-option' name='difficulty' value='EASY'>
+                <label for='EASY'>Beginner</label><br>
+                <input id='choice-medium' type='radio' class='form-option' name='difficulty' value='MEDIUM'>
+                <label for='MEDIUM'>Intermediate</label><br>
+                <input id='choice-hard' type='radio' class='form-option' name='difficulty' value='HARD'>
+                <label for='HARD'>Advanced</label><br>
+            </form>
+        </div>
+
+        <div id='custom-settings'>
+            <h2 id='custom-selector-header'>Custom Settings</h2>
+            <h3>Grid Size: </h3>
+            <div class='custom-selector'>
+                <button id='custom-size-minus' class='selector-btn'>-</button>
+                <div id='custom-size' class='show-selection'>0</div>
+                <button id='custom-size-add' class='selector-btn'>+</button>
+            </div>
+
+            <h3>Number of Mines: </h3>
+            <div class='custom-selector'>
+                <button id='custom-mines-minus' class='selector-btn'>-</button>
+                <div id='custom-mines' class='show-selection'>0</div>
+                <button id='custom-mines-add' class='selector-btn'>+</button>
+            </div>
+            <button id='save-difficulty-btn'>Save</button>
+        </div>
+    </div>
+
+    <div id='gameend-filter' class='gray-filter'></div>
+    <div id='gameend-popup' class='popup-interface'>
+        <h2 id='gameend-message'>Gamestate</h2>
+        <div id='show-game-settings'>
+            <h3>Grid Size: <span id='ending-size'>size</span></h3>
+            <h3> Mines: <span id='ending-mines'>mines</span></h3>
+        </div>
+
+        <div id='score-container'>
+            <div id='current-score'>
+                <h2>Score</h2>
+                <h2 id='show-score'>-- : --</h2>
+            </div>
+            <div id='high-score'>
+                <h2>High Score</h2>
+                <h2 id='show-highscore'>-- : --</h2>
+            </div>
+        </div>
+
+        <button id='play-again-button'>New Game</button>
+    </div>
+
+    <script src='config.js'></script>
+    <script src='game_statistics.js'></script>
+    <script src='gameboard.js'></script>
+    <script src='interface.js'></script>
+</body>
+
+</html>
