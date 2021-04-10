@@ -3,15 +3,16 @@
 
 <head>
     <title>Minesweeper</title>
-    <link rel='icon' type='image/png' href='./assets/icon.png'>
-    <link rel='stylesheet' type='text/css' href='./style.css'>
+    <script src='lib/jquery-3.6.0.slim.min.js'></script>
+    <link rel='icon' type='image/png' href='assets/icon.png'>
+    <link rel='stylesheet' type='text/css' href='style.css'>
 </head>
 
 <body>
     <div id='preload' style='display: none'>
-        <img id='mine' src='./assets/mine.svg' width='1' height='1' alt='mine_image' />
-        <img id='flag' src='./assets/flag.svg' width='1' height='1' alt='flag_image' />
-        <img id='crossed_flag' src='./assets/crossed-flag.svg' width='1' height='1' alt='crossed_flag_image' />
+        <img id='mine' src='assets/mine.svg' width='1' height='1' alt='mine_image' />
+        <img id='flag' src='assets/flag.svg' width='1' height='1' alt='flag_image' />
+        <img id='crossed_flag' src='assets/crossed-flag.svg' width='1' height='1' alt='crossed_flag_image' />
     </div>
 
     <div id='blur-filter'></div>
@@ -116,10 +117,10 @@
         <button id='play-again-button'>New Game</button>
     </div>
 
-    <script src='./config.js'></script>
-    <script src='./game_statistics.js'></script>
-    <script src='./gameboard.js'></script>
-    <script src='./interface.js'></script>
+    <script src='config.js'></script>
+    <script src='game_statistics.js'></script>
+    <script src='gameboard.js'></script>
+    <script src='interface.js'></script>
 </body>
 
 </html>

@@ -31,37 +31,35 @@ function getHighScore(size, mines) {
 }
 
 /* -------- FLAGS LEFT COUNTER METHODS -------- */
-const flags_left = document.getElementById('count-flags');
 let mine_count = 0;
 
 function setMineCount(value) {
     mine_count = value;
-    flags_left.innerHTML = value;
+    $('#count-flags').html(value);
 }
 
 function addMineCount(value) {
     mine_count += value;
-    flags_left.innerHTML = mine_count;
+    $('#count-flags').html(mine_count);
 }
 
 function resetMineCount() {
     mine_count = 0
-    flags_left.innerHTML = 0
+    $('#count-flags').html(0);
 }
 
 /* ------ TIMER METHODS --------- */
 const timer_cap = 999
-const timer = document.getElementById('timer');
 let time = 0;
 let intervalID;
 
 function initiateTimer() {
     time = 0;
-    timer.innerHTML = 0;
+    $('#timer').html(0);
     intervalID = window.setInterval(evt => {
         if (time < timer_cap) {
             time++;
-            timer.innerHTML = time
+            $('#timer').html(time)
         } else {
             freezeTimer();
         }
@@ -79,7 +77,7 @@ function freezeTimer() {
 function resetTimer() {
     freezeTimer();
     time = 0;
-    timer.innerHTML = 0;
+    $('#timer').html(0);
 }
 
 function getTime() {
