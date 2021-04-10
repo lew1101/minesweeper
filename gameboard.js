@@ -40,6 +40,7 @@ class Gameboard {
         this.mines_left = mines
         this.mines = mines
         this.board = this.createBoard();
+
         //event listeners
         this.lastTile = -1;
         this.canvas.addEventListener('mousemove', evt => { //check if hover on tile
@@ -126,10 +127,10 @@ class Gameboard {
 
     leftClickEvent(evt) {
         if (!this.gameOver) {
-
             const tileX = ~~(evt.offsetX / this.tile_length);
             const tileY = ~~(evt.offsetY / this.tile_length);
             const tile = this.board[tileX][tileY];
+
             if (!this.gameStarted) { // starting sequence
                 this.gameStarted = true;
                 this.startGame(tile);
@@ -143,7 +144,6 @@ class Gameboard {
             } else if (tile.isFlagged) { // if tile is flag
                 this.mines_left += 1
                 tile.isFlagged = false;
-
             }
 
             this.checkGameState();
@@ -338,7 +338,7 @@ class Gameboard {
                 }
             }
             if (this.board[xx][yy].value != 'mine') {
-                return [xx, yy] // return new mine location
+                return [xx, yy]; // return new mine location
             }
         }
     }
@@ -448,7 +448,7 @@ class Gameboard {
                     case '6':
                     case '7':
                     case '8':
-                        output += color_codes['mine'] + tile.value + color_codes['escape'];
+                        output += color_codes[tile.value] + tile.value + color_codes['escape'];
                         break;
                     case 'mine':
                         total_mines += 1;
@@ -468,7 +468,7 @@ class Gameboard {
 /* ------- Canvas Resize ------- */
 
 function resizeCanvas() { // resize canvas 
-    const canvas = document.getElementById('gameboard'); //canvas
+    let canvas = document.getElementById('gameboard'); //canvas
     const w = document.documentElement.clientWidth;
     const h = document.documentElement.clientHeight;
     canvas.height = canvas.width = w > h ? h * CANVAS_SCALER : w * CANVAS_SCALER; // choose the smaller dimension as canvas width/height * scaler
@@ -480,8 +480,8 @@ function resetGame(size, mines) {
 
 /* ------- Game Init ------- */
 
-const canvas = document.getElementById('gameboard'); // canvas
-const ctx = canvas.getContext('2d'); // canvas context'
+let canvas = document.getElementById('gameboard'); // canvas
+let ctx = canvas.getContext('2d'); // canvas context
 
 resizeCanvas();
 let settings = DIFFICULTY[DEFAULT_DIFFICULTY]
@@ -489,7 +489,7 @@ setMineCount(settings.mines)
 let gameboard = new Gameboard(canvas, ctx, settings.size, settings.mines);
 gameboard.drawCanvas();
 
-window.addEventListener('resize', evt => { // if window resize -> resize canvas 
+$(window).resize(evt => { // if window resize -> resize canvas
     resizeCanvas();
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
