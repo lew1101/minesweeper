@@ -468,10 +468,9 @@ class Gameboard {
 /* ------- Canvas Resize ------- */
 
 function resizeCanvas() { // resize canvas 
-    let parent = document.getElementById('container')
     const canvas = document.getElementById('gameboard'); //canvas
-    const w = parent.clientWidth;
-    const h = parent.clientHeight;
+    const w = document.documentElement.clientWidth;
+    const h = document.documentElement.clientHeight;
     canvas.height = canvas.width = w > h ? h * CANVAS_SCALER : w * CANVAS_SCALER; // choose the smaller dimension as canvas width/height * scaler
 }
 

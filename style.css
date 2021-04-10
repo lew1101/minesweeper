@@ -41,6 +41,7 @@ h2 {
 
 #stage {
     /* gameboard*/
+    display: block;
     position: fixed;
     border-radius: 5px;
     padding: 40px;
@@ -68,11 +69,13 @@ div#container {
 }
 
 #menu {
+    display: fixed;
     position: absolute;
     top: 20px;
     right: 20px;
     width: 150px;
-    z-index: 10;
+    z-index: 1;
+    margin: 5px;
 }
 
 .menu-button {

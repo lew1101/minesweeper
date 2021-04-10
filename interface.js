@@ -204,5 +204,26 @@ function showGameEndMessage(state) { //
 play_again_button.addEventListener('click', evt => {
     gameend_popup.style.display = 'none';
     gameend_filter.style.display = 'none';
-    resetGame(CURRENT_SIZE, CURRENT_MINES)
+    resetGame(CURRENT_SIZE, CURRENT_MINES);
 });
+
+/* MOBILE RIGHT_CLICK ALTERNATIVE */
+let duration = 1000; //ms
+let touchStart;
+let touchEnd;
+
+window.addEventListener('touchstart', onTouchStart);
+window.addEventListener('touchend', onTouchEnd);
+
+function onTouchStart(e) {
+    touchStart = e.timeStamp;
+}
+
+function onTouchEnd(e) {
+    touchEnd = e.timeStamp;
+    if ((touchEnd - touchStart) >= duration) {
+        gameboard.rightClickEvent()
+    } else {
+        gameboard.leftClickEvent();
+    }
+}
