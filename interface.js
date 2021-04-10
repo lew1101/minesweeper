@@ -24,6 +24,9 @@ $('#instructions-close').click(evt => {
 
 
 /* -------- OPTIONS PAGE -------- */
+
+let oRadio = document.forms[0].elements['difficulty'];
+
 let temp_size = 0;
 let temp_mines = 0;
 
@@ -126,8 +129,6 @@ function showGameOptions(bool) { // whether show settings or not
     $('#difficulty-selector').css('display', bool ? 'block' : 'none');
 }
 
-
-let oRadio = document.forms[0].elements['difficulty'];
 
 function uncheckAllRadio() {
     for (var i = 0; i < oRadio.length; i++) {
