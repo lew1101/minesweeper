@@ -223,8 +223,8 @@ class Gameboard {
         ctx.textBaseline = 'middle';
         ctx.font = 'bold ' + String(this.tile_length / 2) + 'pt Arial';
 
-        this.mines_left = mines
-        this.mines = mines
+        this.mines_left = mines;
+        this.mines = mines;
 
         this.resetGame();
     }
@@ -468,9 +468,10 @@ class Gameboard {
 /* ------- Canvas Resize ------- */
 
 function resizeCanvas() { // resize canvas 
+    let parent = document.getElementById('container')
     const canvas = document.getElementById('gameboard'); //canvas
-    const w = document.documentElement.clientWidth;
-    const h = document.documentElement.clientHeight;
+    const w = parent.clientWidth;
+    const h = parent.clientHeight;
     canvas.height = canvas.width = w > h ? h * CANVAS_SCALER : w * CANVAS_SCALER; // choose the smaller dimension as canvas width/height * scaler
 }
 

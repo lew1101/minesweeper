@@ -6,8 +6,6 @@ body {
 }
 
 html {
-    min-width: 550px;
-    min-height: 700px;
     position: relative;
     overscroll-behavior: none;
 }
@@ -74,6 +72,7 @@ div#container {
     top: 20px;
     right: 20px;
     width: 150px;
+    z-index: 10;
 }
 
 .menu-button {
@@ -141,7 +140,7 @@ div#container {
     background: rgba(255, 255, 255, 0.7);
     z-index: 1000;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 #difficulty-selector h2 {

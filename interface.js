@@ -190,7 +190,7 @@ function showGameEndMessage(state) { //
         current_score.innerHTML = secToMin(time);
         high_score.innerHTML = secToMin(getHighScore(CURRENT_SIZE, CURRENT_MINES));
     } else if (state == 0) {
-        message.innerHTML = 'You Lose!';
+        message.innerHTML = 'Game Over!';
         current_score.innerHTML = secToMin(time);
         high_score.innerHTML = secToMin(getHighScore(CURRENT_SIZE, CURRENT_MINES));
     }
